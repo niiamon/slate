@@ -95,63 +95,50 @@ D. If the expired access token (along with the `client ID` and `client secret`) 
 
 E. If any of the data in the `refresh_token` request are invalid, the API server will return a `HTTP 401 Unauthorized` response to the API client.
 
-## Logout
 
-A. Send a `DELETE` request to the API server
 
-> A. ```DELETE /users/signout```
 
-B. If successful, `HTTP 200` will be returned. Appropriate error message will be returned in any other case.
+
+> To authorize, use this code:
+
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+```
+
+```python
+import 'kittn'
+
+api = Kittn.authorize('meowmeowmeow')
+```
+
+```shell
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here"
+  -H "Authorization: meowmeowmeow"
+```
+
+> Make sure to replace `meowmeowmeow` with your API key.
+
+Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+
+Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+
+`Authorization: meowmeowmeow`
+
+<aside class="notice">
+You must replace `meowmeowmeow` with your personal API key.
+</aside>
 
 # Request Headers 
 
 Clients must use request headers accordingly:
 
-A. All GET requests return JSON and thus must set compatible accept headers, either application/json or \*/\*.
+All GET requests return JSON and thus must set compatible accept headers, either application/json or */*.
+All PUT or PATCH requests must contain a valid JSON body with the Content-Type header set to application/json.
 
-B. All PUT or PATCH requests must contain a valid JSON body with the Content-Type header set to application/json.
-
-# Required Request Parameters
-
-All authenticated requests to the API server must contain the following parameters:
-
-> Required parameters example
-
-```javascript
-?v=HEAD&access_token=a5d75c788e87e76b89a6238dcf1241dae1234
-```
-
-A. `v`: This parameter sets the API version that is requested.
-
-B: `access_token`: This parameter sets the client authentication token received after a successful login to the API server.
-
-## Request Interceptors
-
-It would make sense for a client application to have an HTTP request/response interceptor that intercepts all departing HTTP requests from the application and then appends the two required parameters transparently to the internal code. 
-
-Some links to request interceptors for popular frameworks:
-
-#### AngularJS:
-
-- [Official AngularJS Documentation](https://docs.angularjs.org/api/ng/service/$http)
-- [Lukaduka Merchant Dashboard implementation](https://github.com/niiamon/lukaduka-merchant-dashboard/blob/develop/angular-lukaduka-merchant-backend/app/scripts/app.js): Here we intercept a 401, refresh the OAuth token against the API server and then reissue the request transparently to the human
-- [Bruno Scopelliti](http://blog.brunoscopelliti.com/http-response-interceptors)
-
-#### Android:
-
-- [Official Android Documentation](http://developer.android.com/reference/org/apache/http/HttpRequestInterceptor.html)
-- [Square Retrofit](https://github.com/square/retrofit) - This is a client for Android which enables Android apps consume resources from an API server
-
-### iOS:
-
-- [NSURLProtocol](http://nshipster.com/nsurlprotocol/)
-- [AFNetworking](https://github.com/AFNetworking/AFNetworking)
-- [Agent](https://github.com/hallas/agent)
-- [Cumulus](https://github.com/FivesquareSoftware/Cumulus)
-
-# API Endpoints
-
-# Models
+# Kittens
 
 ## Get All Kittens
 
